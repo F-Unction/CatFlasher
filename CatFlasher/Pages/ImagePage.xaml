@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:utils="clr-namespace:CatFlasher.Utils"
+             x:Class="CatFlasher.ImagePage"
+             Title="ImagePage">
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="34"/>
+        </Grid.RowDefinitions>
+
+        <Grid Padding="10,10,0,0" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="130"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="340"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" MaxLines="1" LineBreakMode="TailTruncation" HorizontalTextAlignment="Center" Text="File"/>
+            <Label Grid.Column="1" HorizontalTextAlignment="Center" Text="Partition"/>
+            <Label Grid.Column="2" HorizontalTextAlignment="Center" Text="Address"/>
+            <Label Grid.Column="3" HorizontalTextAlignment="Center" Text="SHA1"/>
+        </Grid>
+
+        <ScrollView  Grid.Row="1" Margin="0,0,0,18">
+            <ListView x:Name="list" ItemsSource="{Binding Path=Images,Mode=TwoWay }" ItemSelected="ItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <VerticalStackLayout HeightRequest="36">
+                                <Grid Padding="10,0,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="130"/>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="340"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label LineBreakMode="TailTruncation" MaxLines="1" VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="0" Text="{Binding Path=Path,Mode=TwoWay}">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                                        </Label.GestureRecognizers>
+
+                                    </Label>
+                                    <!--controls:EditableLabel Grid.Column="1" ValueText="{Binding Path=Role,Mode=TwoWay}" /-->
+                                    <Grid HeightRequest="36" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center">
+                                        <Label 
+                                            MaxLines="1"
+                                            LineBreakMode="TailTruncation"  
+                                            Text="{Binding Source={x:Reference RoleEntry},Path=Text}"
+                                            x:Name="RoleLabel"
+                                            VerticalOptions="Center" HorizontalOptions="Center">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="TapGestureRecognizer_RoleLabelTapped"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Entry 
+                                            Text="{Binding Mode=TwoWay,Path=Role}" 
+                                            x:Name="RoleEntry"
+                                            VerticalOptions="Center" HorizontalOptions="Center" 
+                                            IsVisible="False" Completed="RoleEntry_Completed"  />
+                                    </Grid>
+
+                                    <!--controls:EditableLabel Grid.Column="2" ValueText="{Binding Path=Address,Mode=TwoWay}" /-->
+                                    <Grid HeightRequest="36" Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center">
+                                        <Label 
+                                            MaxLines="1"
+                                            LineBreakMode="TailTruncation"  
+                                            Text="{Binding Source={x:Reference AddressEntry},Path=Text}"
+                                            x:Name="AddressLabel"
+                                            VerticalOptions="Center" HorizontalOptions="Center">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="TapGestureRecognizer_AddressLabelTapped"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Entry 
+                                            Text="{Binding Mode=TwoWay,Path=Address ,Converter={utils:HexToDecConverter}}" 
+                                            x:Name="AddressEntry"
+                                            VerticalOptions="Center" HorizontalOptions="Center" 
+                                            IsVisible="False" Completed="AddressEntry_Completed"/>
+                                    </Grid>
+
+                                    <Label MaxLines="1" VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="3" Text="{Binding Path=Hash,Mode=TwoWay}" />
+                                </Grid>
+                            </VerticalStackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollView>
+
+        <!--controls:ImageView File="123" Address="0x123"/-->
+        <Grid VerticalOptions="End" Grid.Row="2" HeightRequest="42" Padding="0,0,10,10" HorizontalOptions="Fill">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="75"/>
+                <ColumnDefinition Width="75"/>
+                <ColumnDefinition Width="75"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="75"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Text="Add" Clicked="AddButton_Clicked"   Margin="10,0,0,0"/>
+            <Button Grid.Column="1" x:Name="DelButton" Text="Delete" Clicked="DelButton_Clicked" Margin="10,0,0,0" />
+            <Button Grid.Column="2" Text="Clear" Clicked="ClearButton_Clicked"  Margin="10,0,0,0" />
+
+            <Button Grid.Column="4" Text="Flash" Clicked="Button_Clicked"  HorizontalOptions="EndAndExpand" WidthRequest="{Binding Source={x:Reference DelButton}, Path= Width}"  />
+        </Grid>
+    </Grid>
+</ContentPage>

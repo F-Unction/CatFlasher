@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:CatFlasher"
+             x:Class="CatFlasher.DevicePage"
+             Title="DevicePage">
+    <AbsoluteLayout >
+        <Grid AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5,0.5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Text="Target device:" Grid.Column="0" VerticalOptions="Center" Margin="0,0,10,0"/>
+            <Picker x:Name="devicePicker" x:FieldModifier="public" Grid.Column="1" VerticalOptions="Center" WidthRequest="250" />
+            <Picker x:Name="fuckPicker" />
+        </Grid>
+        <Button Text="Confirm" Clicked="Button_Clicked" WidthRequest="75"  Margin="0,0,18,10" 
+                AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="1,1,75,40" />
+    </AbsoluteLayout>
+
+</ContentPage>
