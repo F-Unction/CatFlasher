@@ -18,7 +18,7 @@ public partial class FastbootPage : ContentPage
             core.fb.Connect();
 
             var response = core.fb.Command(Encoding.ASCII.GetBytes(entry.Text));
-            await DisplayAlert("Command response", Encoding.ASCII.GetString(response.RawData), "OK");
+            await DisplayAlert("Command response",response.Payload, "OK");
 
             core.fb.Disconnect();
         }
