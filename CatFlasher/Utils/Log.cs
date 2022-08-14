@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using WinUIEx.Messaging;
 
 namespace CatFlasher.Utils
 {
@@ -19,8 +20,7 @@ namespace CatFlasher.Utils
         }
 
         public static bool PrintDebug { get; set; } = false;
-        private static StringBuilder builder = new StringBuilder();
-
+        public static StreamWriter writer;
         public delegate void LogHandler(LogEventArgs logEventArgs);
         public static event LogHandler Notify;
 
@@ -37,13 +37,18 @@ namespace CatFlasher.Utils
 
         private static void AppendToLog(Status status, string message)
         {
+            if(writer==null)
+            {
+                writer = new StreamWriter($"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}_{new Random().Next(65536)}");
+            }
+
             message = message
                 .Replace('\n', ' ')
                 .Trim();
 
             var buffer = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff} | {status.ToString().ToUpper(),-8} | {message}";
 
-            builder.AppendLine(buffer);
+            writer.WriteLine(buffer);
 
             if (status == Status.Debug)
             {
@@ -104,9 +109,5 @@ namespace CatFlasher.Utils
             });
         }
 
-        public static string GetLog()
-        {
-            return builder.ToString();
-        }
     }
 }

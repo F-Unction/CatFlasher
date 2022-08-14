@@ -105,6 +105,17 @@ public partial class ImagePage : ContentPage
     }
     #endregion
 
+    private void LoadFromXML(object sender, EventArgs e)
+    {
+
+    }
+
+    private void SaveToXML(object sender, EventArgs e)
+    {
+
+    }
+
+
     private async void Button_Clicked(object sender, EventArgs e)
     {
         var appShell = (AppShell)Application.Current.MainPage;

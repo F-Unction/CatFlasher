@@ -98,6 +98,8 @@
                 <ColumnDefinition Width="75"/>
                 <ColumnDefinition Width="75"/>
                 <ColumnDefinition Width="75"/>
+                <ColumnDefinition Width="95"/>
+                <ColumnDefinition Width="95"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="75"/>
             </Grid.ColumnDefinitions>
@@ -105,8 +107,10 @@
             <Button Grid.Column="0" Text="Add" Clicked="AddButton_Clicked"   Margin="10,0,0,0"/>
             <Button Grid.Column="1" x:Name="DelButton" Text="Delete" Clicked="DelButton_Clicked" Margin="10,0,0,0" />
             <Button Grid.Column="2" Text="Clear" Clicked="ClearButton_Clicked"  Margin="10,0,0,0" />
-
-            <Button Grid.Column="4" Text="Flash" Clicked="Button_Clicked"  HorizontalOptions="EndAndExpand" WidthRequest="{Binding Source={x:Reference DelButton}, Path= Width}"  />
+            <Button Grid.Column="3" Text="Load XML" Clicked="LoadFromXML"  Margin="10,0,0,0" />
+            <Button Grid.Column="4" Text="Save XML" Clicked="SaveToXML"  Margin="10,0,0,0" />
+            
+            <Button Grid.Column="6" Text="Flash" Clicked="Button_Clicked"  HorizontalOptions="EndAndExpand" WidthRequest="{Binding Source={x:Reference DelButton}, Path= Width}"  />
         </Grid>
     </Grid>
 </ContentPage>

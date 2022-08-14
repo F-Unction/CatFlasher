@@ -15,7 +15,7 @@ namespace CatFlasher.Utils
         public delegate void RunWorkerCompletedHandler();
         public event RunWorkerCompletedHandler RunWorkerCompleted;
 
-        private Fastboot fb;
+        public Fastboot fb;
         private FlashArgs args;
 
         private void LogResponse(Fastboot.Response response)
@@ -112,7 +112,7 @@ namespace CatFlasher.Utils
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
-        private void SetNVMEProp(string prop, byte[] value)
+        public void SetNVMEProp(string prop, byte[] value)
         {
             Log.Info($"Writing {prop}...");
 
@@ -139,7 +139,7 @@ namespace CatFlasher.Utils
             }
         }
 
-        private void SetHWDogState(byte state)
+        public void SetHWDogState(byte state)
         {
             foreach (var command in new[] { "hwdog certify set", "backdoor set" })
             {
@@ -206,7 +206,7 @@ namespace CatFlasher.Utils
                     fb.Wait();
                 }
 
-                Log.Info("Connecting...");
+                //Log.Info("Connecting...");
 
                 fb.Connect();
                 //ReadInfo();
