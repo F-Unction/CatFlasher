@@ -11,8 +11,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Label Text="Target device:" Grid.Column="0" VerticalOptions="Center" Margin="0,0,10,0"/>
-            <Picker x:Name="devicePicker" x:FieldModifier="public" Grid.Column="1" VerticalOptions="Center" WidthRequest="250" />
-            <Picker x:Name="fuckPicker" />
+            <Picker x:Name="picker" x:FieldModifier="public" ItemsSource="{Binding Devices}" Grid.Column="1" VerticalOptions="Center" WidthRequest="250" />
         </Grid>
         <Button Text="Confirm" Clicked="Button_Clicked" WidthRequest="75"  Margin="0,0,18,10" 
                 AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="1,1,75,40" />

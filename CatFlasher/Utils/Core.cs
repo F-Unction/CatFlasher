@@ -233,7 +233,7 @@ namespace CatFlasher.Utils
         {
             var worker = new BackgroundWorker();
             worker.DoWork += Worker_DoWork;
-            worker.RunWorkerCompleted += (sender, e) => RunWorkerCompleted();
+            //worker.RunWorkerCompleted += (sender, e) => RunWorkerCompleted();
             worker.RunWorkerAsync(args);
         }
     }

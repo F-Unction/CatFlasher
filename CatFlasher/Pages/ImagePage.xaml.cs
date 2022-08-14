@@ -105,30 +105,34 @@ public partial class ImagePage : ContentPage
     }
     #endregion
 
-    private void Button_Clicked(object sender, EventArgs e)
+    private async void Button_Clicked(object sender, EventArgs e)
     {
         var appShell = (AppShell)Application.Current.MainPage;
         var devicePage = ((DevicePage)
-            (appShell.imagePage.GetPrivate<IEnumerable<Microsoft.Maui.Controls.Element>>("AllChildren")
+            (appShell.devicePage.GetPrivate<IEnumerable<Microsoft.Maui.Controls.Element>>("AllChildren")
             .First()));
-        var devicePicker = devicePage.devicePicker;
-        //var devicePicker = ((DevicePage)appShell.devicePage.Content).devicePicker;
+        var devicePicker = devicePage.picker;
 
         if (devicePicker.SelectedIndex == -1)
         {
-            DisplayAlert("Error!", "No connected devices!", "OK");
+            await DisplayAlert("Error!", "No connected devices!", "OK");
             return;
         }
-        //IsEnabled = false;
+
         var strImgList = "";
         foreach (Bootloader.Image i in ImageVM.Images)
         {
-            strImgList += i.Path + " as " + i.Role + " to " + (string)(new HexToDecConverter().Convert(i.Address, null, null, null));
+            strImgList += i.Path + " as " + i.Role + " to " + (string)(new HexToDecConverter().Convert(i.Address, null, null, null)) +Environment.NewLine;
         }
-        if (!DisplayAlert("Sure to flash this?", strImgList, "Yes", "No").Result)
+
+        var result = await DisplayAlert("Sure to flash this?", strImgList, "Yes", "No");
+
+        if (!result)
         {
             return;
         }
+
+        appShell.CurrentItem = appShell.fastbootPage;
 
         var eventArgs = new FlashArgs
         {
@@ -143,7 +147,6 @@ public partial class ImagePage : ContentPage
         if (!devicePage.IsSelectedDeviceInFastbootMode)
         {
             eventArgs.Bootloader = new Bootloader("", "", ImageVM.Images.ToArray());
-            //bootloaders.First(x => x.Title == deviceBootloader.SelectedItem.ToString());
         }
 
         ((FastbootPage)
