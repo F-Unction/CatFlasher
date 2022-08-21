@@ -18,7 +18,7 @@ public partial class FastbootPage : ContentPage
             core.fb.Connect();
 
             var response = core.fb.Command(Encoding.ASCII.GetBytes(entry.Text));
-            await DisplayAlert("Command response",response.Payload, "OK");
+            await DisplayAlert("Command response", response.Payload, "OK");
 
             core.fb.Disconnect();
         }
@@ -29,3 +29,4 @@ public partial class FastbootPage : ContentPage
             }
         }
     }
+}
