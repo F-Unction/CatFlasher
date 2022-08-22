@@ -13,8 +13,8 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Entry x:Name="entry" Grid.Column="0"/>
-            <Button Grid.Column="1" Clicked="Button_Clicked"/>
+            <Entry x:Name="entry" Grid.Column="0" WidthRequest="50"/>
+            <Button Text="Execute" Grid.Column="1" Clicked="Button_Clicked"/>
         </Grid>
     </AbsoluteLayout>
 </ContentPage>

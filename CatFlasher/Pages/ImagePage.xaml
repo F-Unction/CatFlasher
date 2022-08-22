@@ -19,7 +19,7 @@
                 <ColumnDefinition Width="340"/>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Column="0" MaxLines="1" LineBreakMode="TailTruncation" HorizontalTextAlignment="Center" Text="File"/>
+            <Label Grid.Column="0" HorizontalTextAlignment="Center" Text="File"/>
             <Label Grid.Column="1" HorizontalTextAlignment="Center" Text="Partition"/>
             <Label Grid.Column="2" HorizontalTextAlignment="Center" Text="Address"/>
             <Label Grid.Column="3" HorizontalTextAlignment="Center" Text="SHA1"/>
@@ -45,7 +45,6 @@
                                         </Label.GestureRecognizers>
 
                                     </Label>
-                                    <!--controls:EditableLabel Grid.Column="1" ValueText="{Binding Path=Role,Mode=TwoWay}" /-->
                                     <Grid HeightRequest="36" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center">
                                         <Label 
                                             MaxLines="1"
@@ -64,7 +63,6 @@
                                             IsVisible="False" Completed="RoleEntry_Completed"  />
                                     </Grid>
 
-                                    <!--controls:EditableLabel Grid.Column="2" ValueText="{Binding Path=Address,Mode=TwoWay}" /-->
                                     <Grid HeightRequest="36" Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center">
                                         <Label 
                                             MaxLines="1"
